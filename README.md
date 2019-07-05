@@ -1,4 +1,4 @@
-### Instruction
+## Instruction
 
 ### Speech Recognition
 Speech Recognition with P5.js. When a text phrase is detected e.g. "light on", the webbrowser sends emit to websocket. Websocket forwards speech data with osc to processing.
@@ -22,10 +22,10 @@ Open webbrowser on localhost:8000 to use the speech recognition.
 ## Voice Recognition
 The OpenFramework tool MFCC detects the sound signal an sends it to wekinator. The ML Tool wekinator is used to learn the voice of different users for a personalized light control.
 
-**Start Wekinator**
+**Start MFCC**
+
+**Start Wekinator with the following setup**
 ```
-start MFCC 
-start wekinator
 osc port: 6448
 inputs: 13
 output port: 12000
