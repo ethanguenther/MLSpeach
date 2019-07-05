@@ -43,17 +43,6 @@ void loop()
   else if (output ==3)
   {
     RGB_color(0, 0, 255); // Blue
-    Serial.println("3");
-  }
-  else if (output ==4)
-  {
-    //RGB_color(0, 0, 255); // Blue
-    Serial.println("4");
-  }
-  else if (output ==5)
-  {
-    //RGB_color(0, 0, 255); // Blue
-    Serial.println("5");
   }
 }
 
