@@ -17,7 +17,7 @@ node socketserver.js
 
 Open webbrowser on localhost:8000 to use the speech recognition.
 
-**Start processing**
+**Run processing sketch**
 
 ## Voice Recognition
 The OpenFramework tool MFCC detects the sound signal an sends it to wekinator. The ML Tool wekinator is used to learn the voice of different users for a personalized light control.
