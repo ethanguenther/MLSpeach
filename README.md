@@ -34,3 +34,11 @@ gesture types: 2
 ```
 
 Wekinator must be trained to the different voices, which should be used for the personalized light control.
+
+## MQTT Connection
+MQTT is used to for the connection between processig and the ESP8266. The data is published on the topic "/client" in the local network.
+
+**Start the mosqitto broker**
+```
+/usr/local/sbin/mosquitto -c mosquitto.conf
+```

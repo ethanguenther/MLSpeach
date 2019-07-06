@@ -1,49 +1,70 @@
-#include <VSync.h>    //Including the library that will help us in receiving and sending the values from processing
-ValueReceiver<1> receiver;  /*Creating the receiver that will receive 1 value. 
-Put the number of values to synchronize in the brackets */
-
-/* The below variable will be synchronized in the processing 
-and they should be same on both sides. */
-int output;
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+ 
+const char* ssid = "Y&F";
+const char* password = "9339434330907456";
+const char* mqttServer = "192.168.1.184";
+const int mqttPort = 1883;
+ 
+WiFiClient espClient;
+PubSubClient client(espClient);
 
 // Initializing the pins for led's
 int red_light_pin= 16;
 int green_light_pin = 5;
 int blue_light_pin = 4;
-
-void setup()
-{
-  /* Starting the serial communication because we are communicating with the 
-  Processing through serial. The baudrate should be same as on the processing side. */
-  Serial.begin(9600);
-  pinMode(red_light_pin, OUTPUT);
-  pinMode(green_light_pin, OUTPUT);
-  pinMode(blue_light_pin, OUTPUT);
+int light_mode;
+ 
+void setup() {
+ 
+  Serial.begin(115200);
+  WiFi.begin(ssid, password);
+ 
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.println("Connecting to WiFi..");
+  }
+  Serial.println("Connected to the WiFi network");
+ 
+  client.setServer(mqttServer, mqttPort);
+  client.setCallback(callback);
+ 
+  while (!client.connected()) {
+    Serial.println("Connecting to MQTT...");
+ 
+    if (client.connect("ESP8266Client")) {
+ 
+      Serial.println("connected");  
+ 
+    } else {
+ 
+      Serial.print("failed with state ");
+      Serial.print(client.state());
+      delay(2000);
+ 
+    }
+  }
   
-  // Synchronizing the variable with the processing. The variable must be int type.
-  receiver.observe(output);
+  client.subscribe("/light");  
+ 
 }
+ 
+void callback(char* topic, byte* payload, unsigned int length) {
 
-void loop()
-{
-  // Receiving the output from the processing.
-  receiver.sync();
-  
-  // Matching the received output to light up the RGB LED
-  if (output == 1) 
-  {
-    RGB_color(255, 0, 0); // Red
-    
+  Serial.print("Message arrived in topic: ");
+  Serial.println(topic);
+ 
+  Serial.print("Message:");
+  for (int i = 0; i < length; i++) {
+    Serial.print((char)payload[i]);
   }
-  else if (output == 2)
-  {
-    RGB_color(0, 255, 0); // Green
-    
-  }
-  else if (output ==3)
-  {
-    RGB_color(0, 0, 255); // Blue
-  }
+ 
+  Serial.println();
+  Serial.println("-----------------------");
+}
+ 
+void loop() {
+  client.loop();
 }
 
 void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
@@ -52,5 +73,3 @@ void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
   analogWrite(green_light_pin, green_light_value);
   analogWrite(blue_light_pin, blue_light_value);
 }
-
-    
