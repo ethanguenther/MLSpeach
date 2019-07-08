@@ -42,15 +42,15 @@ void oscEvent(OscMessage theOscMessage) {
   
   // Ethan morning mode
   if (output_browser == 3 && output_wekinator == 1) {
-    client.publish("/light", "ethan_morning");
+    client.publish("/light", "1");
   }
   // Ethan work mode
   else if (output_browser == 4 && output_wekinator == 1) {
-    client.publish("/light", "ethan_work");
+    client.publish("/light", "2");
   }
   // Ethan relax mode
   else if (output_browser == 5 && output_wekinator == 1) {
-    client.publish("/light", "ethan_relax");
+    client.publish("/light", "3");
   }
 }
 

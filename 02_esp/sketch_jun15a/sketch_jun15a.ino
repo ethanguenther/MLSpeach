@@ -1,9 +1,9 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
  
-const char* ssid = "Y&F";
-const char* password = "9339434330907456";
-const char* mqttServer = "192.168.1.184";
+const char* ssid = "iPhone von Valerie";
+const char* password = "1derLand";
+const char* mqttServer = "172.20.10.12";
 const int mqttPort = 1883;
  
 WiFiClient espClient;
@@ -51,7 +51,17 @@ void setup() {
  
 void callback(char* topic, byte* payload, unsigned int length) {
 
-  Serial.print("Message arrived in topic: ");
+  if (payload[0] == '1') {
+    Serial.println ("ethan_morning");
+    RGB_color(0,0,255);
+    
+    }
+  else if (payload[0] == '2') {
+    Serial.println ("ethan_work");
+    RGB_color(255,0,0);
+    }
+
+/*  Serial.print("Message arrived in topic: ");
   Serial.println(topic);
  
   Serial.print("Message:");
@@ -61,6 +71,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
  
   Serial.println();
   Serial.println("-----------------------");
+  */
 }
  
 void loop() {
