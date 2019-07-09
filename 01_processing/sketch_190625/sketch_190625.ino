@@ -52,6 +52,18 @@ void oscEvent(OscMessage theOscMessage) {
   else if (output_browser == 5 && output_wekinator == 1) {
     client.publish("/light", "3");
   }
+  // Valerie morning mode
+  if (output_browser == 3 && output_wekinator == 2) {
+    client.publish("/light", "4");
+  }
+  // Valerie work mode
+  else if (output_browser == 4 && output_wekinator == 2) {
+    client.publish("/light", "5");
+  }
+  // Valerie relax mode
+  else if (output_browser == 5 && output_wekinator == 2) {
+    client.publish("/light", "6");
+  }
 }
 
 // These functions are necessary to run mqtt 
