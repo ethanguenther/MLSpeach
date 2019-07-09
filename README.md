@@ -18,7 +18,10 @@ Open Google Chrome (webkitSpeechRecognition is not supported by other browsers) 
 **Run processing sketch**
 
 ### Voice Recognition
-The OpenFramework tool MFCC detects the sound signal an sends it to wekinator. The machine learning tool wekinator is used for classifiaction. The different voices of the users must be learned for a personalized light control.
+The OpenFramework tool MFCC records our voice and provide outputs to wekinator. It is available on the wekinators example page.
+http://www.wekinator.org/examples/#Audio
+
+The machine learning tool wekinator is used for classifiaction. The different voices of the users must be learned for a personalized light control.
 
 **Start MFCC**
 
